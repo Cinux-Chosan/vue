@@ -12,111 +12,24 @@
 <body>
     <div id="app">
         <!-- {{a + b}} -->
+        {{map.name}}
         <div id="sub"></div>
-        <table>
-            <thead>
-                <tr>
-                    <th>接口解释</th>
-                    <th>接口</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="(k, v) in map">
-                    <td>
-                        {{v}}
-                    </td>
-                    <td>
-                        {{k}}
-                    </td>
-                </tr>
-            </tbody>
-
-        </table>
     </div>
     <script>
-        const UMS_PREFIX = '/icore-gac-ums.setting/icore_ums';
-        const UMS_RISK_PREFIX = '/icore-gac-ums.risk/icore_ums';
-        const UMS_BADE_PREFIX = '/icore-gac-ums.pf-base-admin/icore_ums';
-        const prefiex = `/icore-gac-paic.quote`;
-        const CONVERGE_PREFIX = '/icore-gac.converge';
-        const manage_pref = '/icore-gac-paic.manage/'
-        const apply_pref = '/icore-gac-paic.apply/'
-        const dependent_pref = '/icore-gac-paic.dependent/'
-        const query_pref = '/icore-gac-paic.query/'
-        const quote_pref = '/icore-gac-paic.quote/'
-        const print_pref = '/icore-gac-paic.print/'
-
-        const map = {
-            '询价单和标的id获取任务状态，类型': UMS_RISK_PREFIX + '/do/getByTargetId',
-            '重新派勘 - 单地址': UMS_RISK_PREFIX + '/do/againProspect',
-            '取消派勘 - 单地址': UMS_RISK_PREFIX + '/do/cancelTaskByTargetId',
-            '获取风勘建议 - 基本信息风勘标签': UMS_RISK_PREFIX + '/do/getProposal',
-            '查看上年最新保单  获取epas地址': quote_pref + 'quote/epasBusiness/getEpasUrl',
-            '获取币种信息': manage_pref + 'setting/getCurrencyList',
-            '基础数据': manage_pref + 'setting/loadAcquireParameter',
-            '合作网点': dependent_pref + 'ebcsAcssSAOApi/acquireDepartmentsPartnerWorknetList',
-            '后台保费计算接口': quote_pref + 'quotationApi/calcFeepremiumFormUms',
-            '汇率查询': quote_pref + 'quotationApi/getExhangeRate',
-            '查询预估成本率': UMS_PREFIX + '/do/app/ratio/queryOrgCOR',
-            '获取附件组id下的附件列表 plus，与 getDocumentGroupInfo 的区别在于附件类型变为中文': dependent_pref + 'iMSAOApi/getDocumentGroupInfoPlus',
-            '获取上传附件资料类型数据': manage_pref + 'setting/loadDataTypeItem',
-            '查询总转发人': UMS_PREFIX + `/do/app/stayAction/queryUserById`,
-            '查询总部核保人': UMS_PREFIX + `/do/gac/quoted/price/getUnderwriter`,
-            '查询询价单信息': quote_pref + 'quote/queryQuotationInfoByQuotationNo',
-            '黑名单校验': quote_pref + 'quote/blackListExecutRule',
-            '核保 提交': `${prefiex}/underwrite/underwriteQuote`,
-            '更新询价单 核保保存按钮': `${prefiex}/underwrite/updateQuotation`,
-            '规则校验': `${prefiex}/quote/batchExecutQuoteRule`,
-            '调用再保系统，查询净自留额、基准风险费率、分出比例、临分摊回手续费率': query_pref + 'reinsurance/getPolicyCededInfo',
-            '查询大商风最低费率': quote_pref + 'bigBusinessRisk/getRiskRate',
-            '新增或修改方案信息': quote_pref + 'quote/updateOrInsertScheme',
-            '获取 EOA 地址': quote_pref + 'quote/EOABussinessAction/getEoaUrl',
-            '保存临分发起eoa': quote_pref + 'quote/reinsurance/saveReinsuranceAndSubmitEoa',
-            '确认临分方案信息': quote_pref + 'quote/reinsurance/confirmReinsurance',
-            '查询历史取消临分记录': quote_pref + 'quote/queryCancelFacQuotationMessage',
-            '取消临分': quote_pref + 'quote/reinsurance/cancelFacQuotation',
-            '是否采用临分方案': quote_pref + 'quote/reinsurance/doFacultative',
-            '跳转再保查看再保分出方案页面': quote_pref + 'quote/reinsurance/getReinsuraceRimsUrl',
-            '查询历史取消临分记录': quote_pref + 'quote/queryCancelFacQuotationMessage',
-            '取消临分': quote_pref + 'quote/reinsurance/cancelFacQuotation',
-            '风险等级': dependent_pref + 'ebcsReinsuranceSAOApi/queryRiskLevel',
-            '根据下级部门编码查询二级机构编码': manage_pref + 'setting/getSecondOrgCode',
-            '跳转批复页面': quote_pref + 'quote/getReinsuraceUrl',
-            '获取交叉查询列表': CONVERGE_PREFIX + '/quotation/crossInfoSearch ',
-            '获取特约信息': UMS_PREFIX + '/do/app/specialPromiseSet/querySpecialPromiseList',
-            '查询二级机构': manage_pref + 'setting/loadSecondLevelDepartment',
-            '获取附加险收费比例  - 核保报价计算总保费总费率': UMS_PREFIX + '/do/gac/quoteTask/queryOrgAdditionPre',
-            '查询商业定价上限值': UMS_PREFIX + '/do/app/feesettingAction/queryFeesettingByEbcs',
-            '查询固定费用率': UMS_PREFIX + '/do/app/ratio/queryOrgOER',
-            '校验转发人与当前核保人的机构关系 *  核保报价 - 转发': UMS_PREFIX + `/do/gac/quoteTask/isChildDepartmentOrStayOut`,
-            '校验转发人的产品大类权限 *  核保报价 - 转发': UMS_PREFIX + `/do/gac/quoteTask/checkProductCatalogRight`,
-            '校验转发人是否有权限操作当前询价单对应的产品大类 *  核保报价 - 转发': UMS_PREFIX + `/do/gac/quoteTask/transmitQuoteTask`,
-            '多地址派勘 - 查询当前剩未生效派堪任务': UMS_RISK_PREFIX + '/do/getByQuoTargetIdList',
-            '多地址专业派勘 - 派勘按钮': UMS_RISK_PREFIX + '/do/batchSaveMajorTask',
-            '多地址自助派勘 - 派勘按钮': UMS_RISK_PREFIX + '/do/insertSelfTaskOfTargets',
-            '多地址派勘 - 查询标的状态': UMS_RISK_PREFIX + '/do/unionReturnTask',
-        }
-
         var app = new Vue({
             el: '#app',
-            beforeCreate() {
-                debugger
-            },
             data() {
                 return {
-                    a: 1,
-                    b: 2,
-                    map
+                    map: {
+                        name: 'wo shi zhang jian jun'
+                    }
                 }
             }
         })
 
-        var node = new Vue({
-            template: '<span>11111</span>',
-            // el: '#sub',
-            // parent: app
-        })
-        // node.$mount('#sub')
+        setTimeout(() => {
+            app.map.name = 'wxxxxxxxx'
+        }, 2000);
     </script>
 </body>
 

@@ -35,6 +35,8 @@ const sharedPropertyDefinition = {
   set: noop
 }
 
+// sourceKey 为 target 上的一个对象属性的属性名，该函数将 sourceKey 代表的对象中的属性 key 代理到 target 上，即通过 target[key] 实际访问的是 sourceKey 中的对象
+// 在初始化 data 的时候就会使用该函数把 data 中的对象全部代理到 vm 上，因此可以通过 this.xx 访问到 data 中的属性
 export function proxy (target: Object, sourceKey: string, key: string) {
   sharedPropertyDefinition.get = function proxyGetter () {
     return this[sourceKey][key]
@@ -51,6 +53,7 @@ export function initState (vm: Component) {
   if (opts.props) initProps(vm, opts.props)
   if (opts.methods) initMethods(vm, opts.methods)
   if (opts.data) {
+    debugger
     initData(vm)
   } else {
     observe(vm._data = {}, true /* asRootData */)

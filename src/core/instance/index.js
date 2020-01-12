@@ -6,7 +6,6 @@ import { lifecycleMixin } from './lifecycle'
 import { warn } from '../util/index'
 
 function Vue (options) {
-  debugger
   if (process.env.NODE_ENV !== 'production' &&
     !(this instanceof Vue)
   ) {
@@ -14,7 +13,7 @@ function Vue (options) {
   }
   this._init(options)
 }
-
+debugger
 initMixin(Vue)
 stateMixin(Vue)
 eventsMixin(Vue)

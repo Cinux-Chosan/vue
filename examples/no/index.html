@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+
+<div id="opop">
+    <div class="op"></div>
+    <div class="op"></div>
+    <div class="op op-node-change"></div>
+</div>
+<!--引用jqery-->
+<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script>
+<script>
+
+    var targetNode =document.getElementById('opop');
+
+    var observer = new MutationObserver(function(mutations) {
+        var $node = $('#opop .op:not(.op-node-change)');
+        $node.addClass('op-node-change test');
+        console.log('111', mutations);
+    });
+
+    observer.observe(targetNode, { attributes: true, childList: true, subtree: true });
+
+</script>
